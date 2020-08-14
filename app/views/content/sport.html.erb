@@ -1,0 +1,73 @@
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+.navbar{ 
+text-align: center;
+font-size: large;
+}
+</style>
+<body >
+
+<div class="container" style="text-align: center;" >
+<% @posts.each do |post| %>
+      
+        
+        
+  
+        
+
+         <!-- Page Content -->
+
+    <div class="w3-content">
+
+      <!-- Blog Entries Column -->
+      <div class="">
+        <!-- Blog Post -->
+        <div class="" style="padding-bottom:25px;">
+            <% if post.body.embeds.find{|embeds| embeds.image?} %>
+              <%= image_tag post.body.embeds.find{|embeds| embeds.image?}.representation(resize_to_limit: [ 700, 300 ] )%>
+            <% else %>
+                 <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+            <% end %>
+         
+
+          <div class="card-body">
+            <h2 class="card-title"><%= post.title %></h2>
+            <p class="card-text"><%= post.description %></p>
+            <a> <%= link_to 'Read More ', post %></a>
+          </div>
+          <div class="card-footer bg-primary ">
+           <%= post.created_at %>
+            
+          </div>
+        </div>
+      </div>
+
+    
+  </div>
+  <!-- /.container -->
+      
+      
+<% end %>
+
+
+<h5><%= link_to 'Back', welcome_index_path %></h5>
+
+
+
+
+
+
+
+ 
+
+  <!-- Footer -->
+  <footer class="p-5 bg-ydark">
+    <div class="w3-display-container w3-center">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+</body>
+
+

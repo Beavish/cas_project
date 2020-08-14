@@ -1,0 +1,32 @@
+<div class="container" align = "center">
+<h2> Forgotten Your Password?</h2>
+<p>
+<div class="container">
+
+<h3>
+  
+  <small class="text-muted">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis iudicium purus sit amet fermentum.</small>
+</h3>
+
+
+</div>
+<p>
+
+<div class="container" align="center">
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <h3>Enter Your <%= f.label :email %> :<br /></h3>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+<br>
+  <div class="actions">
+    <%= f.submit "Send me reset password instructions" %>
+  </div>
+<% end %>
+<br>
+
+<%= render "devise/shared/links" %>
+</div>

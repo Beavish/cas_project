@@ -1,0 +1,46 @@
+<div class="container" align ="justify" >
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+   <%= form.label :title %>
+    <%= form.text_field :title %>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+    <%= form.label :Genre %>
+    <%= form.select(:Genre, options_for_select([['Sport',], ['World'], ['Business'], ['Culture'], ['Design'], ['Politics'], ['Opinion'], ['Science'], ['Health'], ['Travel'], ['Technology']])) %>
+  </div>
+
+  <div class="form-group">
+  
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :body %>
+    <%= form.rich_text_area :body %>
+
+  </div>
+ 
+
+  <div class="form-group">
+
+  <%= form.label :public %>
+  <%= form.check_box :public %>
+  </div>
+   
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <% end %>
+</div>

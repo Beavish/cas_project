@@ -1,0 +1,60 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script>
+$( document ).ready(function() {
+     $.ajax({
+              type:'GET',
+              url:'/content/weather'
+              });
+});
+</script>
+<div class="container" align = "center">
+<h2> Weather in your Area</h2>
+<p>
+<div class="container">
+
+<h3>
+  
+  <small class="text-muted">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis iudicium purus sit amet fermentum.</small>
+</h3>
+
+
+</div>
+<p>
+
+<div class="container-fluid" align="center">
+  <div class="row">
+    <div class="col">
+    <h4>Weather Description:</h4>
+    <%=  @response["list"][0]["weather"][0]["description"]%> 
+    </div>
+    </div>
+
+    <br>
+    <div class="row">
+     <div class="col">
+   <h4> Cloud Coverage:</h4>
+    <%=  @response["list"][0]["clouds"]["all"]%> %
+    </div>
+    </div>
+
+     <br>
+     <div class="row">
+    <div class="col">
+    <h4>Wind Speed:</h4>
+    <%=  @response["list"][0]["wind"]["speed"]%> kmph
+    </div>
+    </div>
+     <br>
+     <div class="row">
+    <div class="col">
+    <h4>chances of percipitation:</h4>
+    <%=  rand(100)%> %
+     </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<h4><%= link_to 'Back', welcome_index_path %></h4>

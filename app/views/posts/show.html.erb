@@ -1,0 +1,42 @@
+
+<div class = 'container-fluid' align="justify">
+
+<p>
+  
+ <h2> <%= @post.title %></h2>
+ <h4>
+  <br>
+  <small class="text-muted"><%= @post.description %></small>
+  <br>
+  </h4>
+  
+  <%= @post.body %>
+ 
+
+
+<p>
+
+ 
+  
+
+<%if user_signed_in?%>
+
+<%if current_user.id == @post.user_id%>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+
+<%= link_to 'Back', content_sport_path %>
+
+<%else%>
+
+<%= link_to 'Back', content_sport_path %>
+
+<%end%>
+
+<%else%>
+
+<%= link_to 'Back', content_sport_path %>
+
+<%end%>
+
+</div>

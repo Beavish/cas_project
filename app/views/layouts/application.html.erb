@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NewsWorthy</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <%= if user_signed_in?
+    if (current_user.journalist == true) || (current_user.admin == true)
+    render partial: "partials/nav" 
+    end
+  end%>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  
+  <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+
+        <div class="container">
+  <div class="row">
+    <div class="col-sm">
+Public IP address: <%= @y['ip'] %>
+    </div>
+    <div class="col-sm">
+Country: <%= @y['country']%>
+    </div>
+    <div class="col-sm">
+City: <%= @y['city']%>
+</div>
+  </div>
+</div>
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-sm">
+                    <h3>Make User an admin:</h3>
+                <%= form_tag("/data/update_current_user_to_admin", method: "post", id: "payment_form") do %>
+                <input type="visible" id="admin" name="user_id" />
+                <button class="btn btn-primary" id="p" type="submit"><span>Create Admin</span></button>
+                  <% end %>
+              </div>
+
+           <div class="col-sm">
+           <h3>Make User an Journalist:</h3>
+            <%= form_tag("/data/update_current_user_to_journalist", method: "post", id: "j_form") do %>
+            <input type="visible" id="admin" name="user_id" />
+            <button class="btn btn-primary" id="x" type="submit"><span>Create Journalist</span></button>
+            <% end %>
+              </div>
+
+
+          <div class="col-sm">
+          
+  <div class="card-body">
+    <h5 class="card-title">Data Visualised</h5>
+    <p class="card-text">The following Page displays Word counts, As well as the number of users and other graphically represented data</p>
+    <a href="/data/index" class="btn btn-primary stretched-link">Data Analysis</a>
+  </div>
+</div>
+
+          </div>
+
+          </div>
+        </div>
+<br>
+
+<p>
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Subscriptions</th>
+      <th scope="col">ID</th>
+      <th scope="col">price</th>
+      <th scope="col">Created At</th>
+    </tr>
+  </thead>
+  </table>
+
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+var admin_form = document.querySelector('#payment_form');
+var j_form =document.querySelector('j_form')
+$("#p").click(function(){
+    admin_form.submit()
+});
+$("#x").click(function(){
+    j_form.submit()
+});
+</script>
+
+<div style="overflow-y: scroll; height:400px;">
+<table class="table table-hover">
+  <tbody>
+  <tbody>
+    <% @collection.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= post.status %></td>
+        <td><%= post.price %></td>
+        <td><%= post.created_at %></td>      
+      </tr>
+    <% end %>
+  </tbody>
+  </tbody>
+</table>
+</div>
