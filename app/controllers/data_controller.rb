@@ -98,10 +98,10 @@ end
 
     def subscription_seach
      @collection = gateway.subscription.search do |search|
-        search.plan_id.is "KieransPlan"
+        search.plan_id.is "soccer"
       end
       @collection.each do |subscription|
-        puts subscription.id, subscription.status, subscription.created_at, subscription.price
+        
       end
     end
 
