@@ -40,33 +40,7 @@ class CheckoutsController < ApplicationController
 
   def show
     @transaction = gateway.subscription.find(params[:id])
-        # Returns a connection instance
-      conn = Bunny.new('amqp://pcmdmyji:mwukPxVFjdlzhH3RdgpVIafzwI2zjavH@bonobo.rmq.cloudamqp.com/pcmdmyji')
-      # The connection is established when start is called
-      conn.start
-
-      # Create a channel in the TCP connection
-      ch = conn.create_channel
-      # Declare a queue with a given name, examplequeue. In this example is a durable shared queue used.
-      q  = ch.queue("examplequeue", :durable => true)
-
-      # Method for the PDF processing
-      def pdf_processing(json_information_message)
-        puts "Handling pdf processing for "
-        puts json_information_message['email']
-        sleep 5.0
-        puts "pdf processing done"
-      end
-
-      # Set up the consumer to subscribe from the queue
-      q.subscribe(:block => true) do |delivery_info, properties, payload|
-        json_information_message = JSON.parse(payload)
-        pdf_processing(json_information_message)
-        sleep 1.0
-        conn.close
-      end
-
-     
+        # Returns a connection instance    
     #p @transaction
     #@result = _create_result_hash(@transaction)
   end
@@ -106,6 +80,30 @@ class CheckoutsController < ApplicationController
         
     if newSubscription.success?
       redirect_to checkout_path(newSubscription.subscription.id)
+      conn = Bunny.new('amqp://pcmdmyji:mwukPxVFjdlzhH3RdgpVIafzwI2zjavH@bonobo.rmq.cloudamqp.com/pcmdmyji')
+      # The connection is established when start is called
+      conn.start
+
+      # Create a channel in the TCP connection
+      ch = conn.create_channel
+      # Declare a queue with a given name, examplequeue. In this example is a durable shared queue used.
+      q  = ch.queue("examplequeue", :durable => true)
+
+      # Method for the PDF processing
+      def pdf_processing(json_information_message)
+        puts "Handling pdf processing for "
+        puts json_information_message['email']
+        sleep 5.0
+        puts "pdf processing done"
+      end
+
+      # Set up the consumer to subscribe from the queue
+      q.subscribe(:block => true) do |delivery_info, properties, payload|
+        json_information_message = JSON.parse(payload)
+        pdf_processing(json_information_message)
+        sleep 1.0
+        conn.close
+      end
     else
       error_messages = result.errors.map { |error| "Error: #{error.code}: #{error.message}" }
       flash[:error] = error_messages
